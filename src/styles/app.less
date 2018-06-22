@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'CoFo-Sans';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/cofo-sans-regular.woff2') format('woff2'),
+    url('../fonts/cofo-sans-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Oswald Light'), local('Oswald-Light'),
+       url('../fonts/oswald-v16-latin-300.woff2') format('woff2'),
+       url('../fonts/oswald-v16-latin-300.woff') format('woff');
+}
+
+body {
+  font-family: 'CoFo-Sans', sans-serif;
+  -moz-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-size: 16px;
+  background: @lightgray;
+  color: @black;
+}
+
+a {
+  color: @blue;
+  text-decoration: none;
+}

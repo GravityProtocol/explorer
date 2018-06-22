@@ -1,0 +1,26 @@
+.menu {
+  display: flex;
+  margin: 0 -15px;
+}
+
+.menu__item {
+  padding: 0 10px;
+}
+
+.menu__link {
+  display: block;
+  height: 85px;
+  line-height: 85px;
+  padding: 0 5px;
+  border-top: 1px solid transparent;
+  font-size: 18px;
+  transition: border-top 0.2s ease, color 0.2s ease;
+  color: @gray;
+}
+
+.menu__item_active {
+  .menu__link {
+    border-top: 1px solid @red;
+    color: @black;
+  }
+}
