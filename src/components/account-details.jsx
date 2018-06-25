@@ -58,7 +58,7 @@ function AccountDetails() {
             <div className="panel">
               <h2>Account Information</h2>
               <div className="table-wrapper">
-                <table>
+                <table className="table_rounted-bottom-corner">
                   <tbody>
                     <tr>
                       <td><i>Lifetime Fees Paid</i></td>

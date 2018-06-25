@@ -1,3 +1,4 @@
+import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import React from 'react';
@@ -15,26 +16,51 @@ function Header(props) {
       <div className="container">
         <div className="header__inner">
           <div className="header__section header__section_logo">
-            <Logo />
+            <Link to="/"><Logo /></Link>
           </div>
 
           <div className="header__section header__section_menu">
             <nav className="menu">
-              <div className="menu__item menu__item_active">
-                <a className="menu__link" href="/dashboard">Dashboard</a>
-              </div>
-              <div className="menu__item">
-                <a className="menu__link" href="/accounts">Accounts</a>
-              </div>
-              <div className="menu__item">
-                <a className="menu__link" href="/witnesses">Witnesses</a>
-              </div>
-              <div className="menu__item">
-                <a className="menu__link" href="/committee">Committee</a>
-              </div>
-              <div className="menu__item">
-                <a className="menu__link" href="/fee">Fee</a>
-              </div>
+              <NavLink to="/" className="menu__item" activeClassName="menu__item_active" exact>
+                <span className="menu__link">Dashboard</span>
+              </NavLink>
+
+              <NavLink
+                exact
+                to="/accounts"
+                className="menu__item"
+                activeClassName="menu__item_active"
+                isActive={(match, location) => location.pathname.indexOf('/accounts') === 0}
+              >
+                <span className="menu__link">Accounts</span>
+              </NavLink>
+
+              <NavLink
+                className="menu__item"
+                to="/witnesses"
+                activeClassName="menu__item_active"
+                isActive={(match, location) => location.pathname.indexOf('/witnesses') === 0}
+              >
+                <span className="menu__link">Witnesses</span>
+              </NavLink>
+
+              <NavLink
+                className="menu__item"
+                to="/committee"
+                activeClassName="menu__item_active"
+                isActive={(match, location) => location.pathname.indexOf('/committee') === 0}
+              >
+                <span className="menu__link">Committee</span>
+              </NavLink>
+
+              <NavLink
+                className="menu__item"
+                to="/fee"
+                activeClassName="menu__item_active"
+                isActive={(match, location) => location.pathname.indexOf('/fee') === 0}
+              >
+                <span className="menu__link">Fee</span>
+              </NavLink>
             </nav>
           </div>
 
