@@ -1,0 +1,44 @@
+.table-wrapper {
+  margin: 0 -20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 16px;
+}
+
+thead {
+  color: @gray;
+}
+
+tbody {
+  tr {
+    &:last-child {
+      td {
+        &:first-child {
+          border-radius: 0 0 0 10px;
+        }
+
+        &:last-child {
+          border-radius: 0 0 10px 0;
+        }
+      }
+    }
+
+    &:nth-child(odd) {
+      td {
+        background: #fbfbfb;
+      }
+    }
+
+    &:hover {
+      td {
+        background: rgba(0,0,0,0.05);
+      }
+    }
+  }
+}
