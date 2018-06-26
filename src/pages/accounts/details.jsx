@@ -1,9 +1,13 @@
 import React from 'react';
 import AccountDetails from '../../components/account-details';
+import AccountHeader from '../../components/account-header';
 
 function AccountDetailsPage() {
   return (
-    <AccountDetails />
+    <div>
+      <AccountHeader />
+      <AccountDetails />
+    </div>
   );
 }
 

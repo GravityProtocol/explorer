@@ -1,9 +1,30 @@
 .grid {
   display: flex;
   margin: -10px;
+  flex-wrap: wrap;
+
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  @media (max-width: 767px) {
+    margin: 0;
+  }
 }
 
 .grid__item {
+  box-sizing: border-box;
   flex: 1 1 50%;
   padding: 10px;
+
+  @media (max-width: 1023px) {
+    flex: 1 1 100%;
+  }
+
+  @media (max-width: 767px) {
+    margin: 0 0 20px;
+    padding: 0;
+  }
 }

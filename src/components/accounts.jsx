@@ -11,7 +11,7 @@ function Accounts() {
           <h2>Accounts</h2>
 
           <div className="table-wrapper">
-            <table>
+            <table className="table_responsive">
               <thead>
                 <tr>
                   <td>
@@ -68,60 +68,60 @@ function Accounts() {
               </thead>
               <tbody>
                 <tr>
-                  <td>1.2.0</td>
-                  <td><Link to="/accounts/test">committee-account</Link></td>
-                  <td>0 <i>ZVG</i></td>
-                  <td>0</td>
-                  <td>0 <i>ZVG</i></td>
+                  <td data-title="ID">1.2.0</td>
+                  <td data-title="Name"><Link to="/accounts/test">committee-account</Link></td>
+                  <td data-title="Emission">0&nbsp;<i>ZVG</i></td>
+                  <td data-title="Gravity Index">0</td>
+                  <td data-title="Amount">0&nbsp;<i>ZVG</i></td>
                 </tr>
                 <tr>
-                  <td>1.2.6</td>
-                  <td><Link to="/accounts/test">init0</Link></td>
-                  <td>0 <i>ZVG</i></td>
-                  <td>0</td>
-                  <td>0 <i>ZVG</i></td>
+                  <td data-title="ID">1.2.0</td>
+                  <td data-title="Name"><Link to="/accounts/test">committee-account</Link></td>
+                  <td data-title="Emission">0&nbsp;<i>ZVG</i></td>
+                  <td data-title="Gravity Index">0</td>
+                  <td data-title="Amount">0&nbsp;<i>ZVG</i></td>
                 </tr>
                 <tr>
-                  <td>1.2.7</td>
-                  <td><Link to="/accounts/test">init1</Link></td>
-                  <td>0 <i>ZVG</i></td>
-                  <td>0</td>
-                  <td>0 <i>ZVG</i></td>
+                  <td data-title="ID">1.2.0</td>
+                  <td data-title="Name"><Link to="/accounts/test">committee-account</Link></td>
+                  <td data-title="Emission">0&nbsp;<i>ZVG</i></td>
+                  <td data-title="Gravity Index">0</td>
+                  <td data-title="Amount">0&nbsp;<i>ZVG</i></td>
                 </tr>
                 <tr>
-                  <td>1.2.0</td>
-                  <td><Link to="/accounts/test">init2</Link></td>
-                  <td>0 <i>ZVG</i></td>
-                  <td>0</td>
-                  <td>0 <i>ZVG</i></td>
+                  <td data-title="ID">1.2.0</td>
+                  <td data-title="Name"><Link to="/accounts/test">committee-account</Link></td>
+                  <td data-title="Emission">0&nbsp;<i>ZVG</i></td>
+                  <td data-title="Gravity Index">0</td>
+                  <td data-title="Amount">0&nbsp;<i>ZVG</i></td>
                 </tr>
                 <tr>
-                  <td>1.2.0</td>
-                  <td><Link to="/accounts/test">init3</Link></td>
-                  <td>0 <i>ZVG</i></td>
-                  <td>0</td>
-                  <td>0 <i>ZVG</i></td>
+                  <td data-title="ID">1.2.0</td>
+                  <td data-title="Name"><Link to="/accounts/test">committee-account</Link></td>
+                  <td data-title="Emission">0&nbsp;<i>ZVG</i></td>
+                  <td data-title="Gravity Index">0</td>
+                  <td data-title="Amount">0&nbsp;<i>ZVG</i></td>
                 </tr>
                 <tr>
-                  <td>1.2.0</td>
-                  <td><Link to="/accounts/test">init4</Link></td>
-                  <td>0 <i>ZVG</i></td>
-                  <td>0.005</td>
-                  <td>0 <i>ZVG</i></td>
+                  <td data-title="ID">1.2.0</td>
+                  <td data-title="Name"><Link to="/accounts/test">committee-account</Link></td>
+                  <td data-title="Emission">0&nbsp;<i>ZVG</i></td>
+                  <td data-title="Gravity Index">0</td>
+                  <td data-title="Amount">0&nbsp;<i>ZVG</i></td>
                 </tr>
                 <tr>
-                  <td>1.2.0</td>
-                  <td><Link to="/accounts/test">init4</Link></td>
-                  <td>0 <i>ZVG</i></td>
-                  <td>0.005</td>
-                  <td>0 <i>ZVG</i></td>
+                  <td data-title="ID">1.2.0</td>
+                  <td data-title="Name"><Link to="/accounts/test">committee-account</Link></td>
+                  <td data-title="Emission">0&nbsp;<i>ZVG</i></td>
+                  <td data-title="Gravity Index">0</td>
+                  <td data-title="Amount">0&nbsp;<i>ZVG</i></td>
                 </tr>
                 <tr>
-                  <td>1.2.0</td>
-                  <td><Link to="/accounts/test">init4</Link></td>
-                  <td>0 <i>ZVG</i></td>
-                  <td>0.005</td>
-                  <td>0 <i>ZVG</i></td>
+                  <td data-title="ID">1.2.0</td>
+                  <td data-title="Name"><Link to="/accounts/test">committee-account</Link></td>
+                  <td data-title="Emission">0&nbsp;<i>ZVG</i></td>
+                  <td data-title="Gravity Index">0</td>
+                  <td data-title="Amount">0&nbsp;<i>ZVG</i></td>
                 </tr>
               </tbody>
             </table>

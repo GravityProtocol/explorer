@@ -2,6 +2,7 @@ import { KEY_ESCAPE } from 'keycode-js';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { screenTypes } from '../actions/screen';
 import IconSearch from './icons/search';
 import IconClose from './icons/close';
 
@@ -25,7 +26,7 @@ function Search(props) {
         <input
           className="search__query"
           type="text"
-          placeholder="Find a block, transaction or account"
+          placeholder={props.screenType === screenTypes.LARGE ? 'Find a block, transaction or account' : 'Search'}
           onFocus={() => props.onFocus()}
           onKeyUp={(e) => {
             if (e.keyCode === KEY_ESCAPE) {
@@ -47,6 +48,7 @@ Search.propTypes = {
   onFocus: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
   onReset: PropTypes.func.isRequired,
+  screenType: PropTypes.string.isRequired,
 };
 
 export default Search;

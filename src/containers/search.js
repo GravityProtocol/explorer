@@ -4,6 +4,7 @@ import Search from '../components/search';
 
 const mapStateToProps = state => ({
   active: state.search.active,
+  screenType: state.screen.type,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,26 +1,52 @@
 .menu {
   display: flex;
   margin: 0 -15px;
+
+  @media (max-width: 1023px) {
+    display: block;
+    margin: 0 -20px;
+    padding: 0 20px;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.02);
+    background: @white;
+  }
 }
 
 .menu__item {
-  padding: 0 10px;
+  display: block;
+  padding: 0 15px;
+
+  @media (max-width: 1023px) {
+    padding: 0 20px;
+  }
+
+  @media (max-width: 767px) {
+    padding: 0;
+  }
 }
 
 .menu__link {
   display: block;
   height: 85px;
   line-height: 85px;
-  padding: 0 5px;
   border-top: 1px solid transparent;
   font-size: 18px;
   transition: border-top 0.2s ease, color 0.2s ease;
   color: @gray;
+
+  @media (max-width: 1023px) {
+    height: 60px;
+    line-height: 60px;
+    border-top: none;
+  }
 }
 
 .menu__item_active {
   .menu__link {
     border-top: 1px solid @red;
     color: @black;
+
+    @media (max-width: 1023px) {
+      border-top: none;
+    }
   }
 }

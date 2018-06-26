@@ -1,12 +1,17 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app';
+import thunk from 'redux-thunk';
+import App from './containers/app';
 import reducers from './reducers';
+import { addResizeScreenListener, addScrollScreenListener } from './actions/screen';
 import './index.less';
 
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunk));
+
+addResizeScreenListener(store.dispatch);
+addScrollScreenListener(store.dispatch);
 
 ReactDOM.render(
   <Provider store={store}>

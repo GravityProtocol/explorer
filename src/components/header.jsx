@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import React from 'react';
 import Logo from './logo';
 import SearchContainer from '../containers/search';
+import IconToggler from './icons/toggler';
+import IconClose from './icons/close';
 
 function Header(props) {
   return (
@@ -11,74 +13,121 @@ function Header(props) {
       className={classNames(
         'header',
         { 'header_search-active': props.searchIsActive },
+        { 'header_scroll-active': props.scrollIsActive },
+        { 'header_menu-active': props.menuIsActive },
       )}
     >
-      <div className="container">
-        <div className="header__inner">
-          <div className="header__section header__section_logo">
-            <Link to="/"><Logo /></Link>
-          </div>
-
-          <div className="header__section header__section_menu">
-            <nav className="menu">
-              <NavLink to="/" className="menu__item" activeClassName="menu__item_active" exact>
-                <span className="menu__link">Dashboard</span>
-              </NavLink>
-
-              <NavLink
-                exact
-                to="/accounts"
-                className="menu__item"
-                activeClassName="menu__item_active"
-                isActive={(match, location) => location.pathname.indexOf('/accounts') === 0}
+      <div className="header__container">
+        <div className="container">
+          <div className="header__inner">
+            <div className="header__section header__section_menu-toggler">
+              <button
+                className="menu-toggler"
+                onClick={() => {
+                  if (props.menuIsActive) {
+                    props.hideMenu();
+                  } else {
+                    props.showMenu();
+                  }
+                }}
               >
-                <span className="menu__link">Accounts</span>
-              </NavLink>
+                {props.menuIsActive ? <IconClose /> : <IconToggler />}
+              </button>
+            </div>
 
-              <NavLink
-                className="menu__item"
-                to="/witnesses"
-                activeClassName="menu__item_active"
-                isActive={(match, location) => location.pathname.indexOf('/witnesses') === 0}
-              >
-                <span className="menu__link">Witnesses</span>
-              </NavLink>
+            <div className="header__section header__section_logo">
+              <Link to="/"><Logo /></Link>
+            </div>
 
-              <NavLink
-                className="menu__item"
-                to="/committee"
-                activeClassName="menu__item_active"
-                isActive={(match, location) => location.pathname.indexOf('/committee') === 0}
-              >
-                <span className="menu__link">Committee</span>
-              </NavLink>
+            <div
+              className={classNames(
+                'header__section',
+                'header__section_menu',
+                { header__section_menu_active: props.menuIsActive },
+              )}
+            >
+              <nav className="menu">
+                <NavLink
+                  exact
+                  to="/"
+                  className="menu__item"
+                  activeClassName="menu__item_active"
+                  onClick={() => props.hideMenu()}
+                >
+                  <span className="menu__link">Dashboard</span>
+                </NavLink>
 
-              <NavLink
-                className="menu__item"
-                to="/fee"
-                activeClassName="menu__item_active"
-                isActive={(match, location) => location.pathname.indexOf('/fee') === 0}
-              >
-                <span className="menu__link">Fee</span>
-              </NavLink>
-            </nav>
-          </div>
+                <NavLink
+                  exact
+                  to="/accounts"
+                  className="menu__item"
+                  activeClassName="menu__item_active"
+                  isActive={(match, location) => location.pathname.indexOf('/accounts') === 0}
+                  onClick={() => props.hideMenu()}
+                >
+                  <span className="menu__link">Accounts</span>
+                </NavLink>
 
-          <div className="header__section header__section_search">
-            <SearchContainer />
-          </div>
+                <NavLink
+                  className="menu__item"
+                  to="/witnesses"
+                  activeClassName="menu__item_active"
+                  isActive={(match, location) => location.pathname.indexOf('/witnesses') === 0}
+                  onClick={() => props.hideMenu()}
+                >
+                  <span className="menu__link">Witnesses</span>
+                </NavLink>
 
-          <div className="header__section header__section_action">
-            <a className="button" href="https://wallet.gravityprotocol.org/">Create Wallet</a>
+                <NavLink
+                  className="menu__item"
+                  to="/committee"
+                  activeClassName="menu__item_active"
+                  isActive={(match, location) => location.pathname.indexOf('/committee') === 0}
+                  onClick={() => props.hideMenu()}
+                >
+                  <span className="menu__link">Committee</span>
+                </NavLink>
+
+                <NavLink
+                  className="menu__item"
+                  to="/fee"
+                  activeClassName="menu__item_active"
+                  isActive={(match, location) => location.pathname.indexOf('/fee') === 0}
+                  onClick={() => props.hideMenu()}
+                >
+                  <span className="menu__link">Fee</span>
+                </NavLink>
+              </nav>
+            </div>
+
+            <div className="header__section header__section_search">
+              <SearchContainer />
+            </div>
+
+            <div className="header__section header__section_action">
+              <a className="button" href="https://wallet.gravityprotocol.org/">Create Wallet</a>
+            </div>
           </div>
         </div>
       </div>
+
+      {props.menuIsActive && (
+        <div
+          role="presentation"
+          className="overlay"
+          onClick={() => props.hideMenu()}
+        />
+      )}
     </header>
   );
 }
 
 Header.propTypes = {
   searchIsActive: PropTypes.bool.isRequired,
+  showMenu: PropTypes.func.isRequired,
+  hideMenu: PropTypes.func.isRequired,
+  menuIsActive: PropTypes.bool.isRequired,
+  scrollIsActive: PropTypes.bool.isRequired,
 };
 
 export default Header;

@@ -6,7 +6,14 @@ function HomePage() {
   return (
     <div>
       <Dashboard />
-      <RecentActivity />
+
+      <div className="container">
+        <div className="section">
+          <div className="panel">
+            <RecentActivity />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import React from 'react';
 
-function RecentActivity() {
+function Commissions() {
   return (
     <div className="container">
       <div className="section">
         <div className="panel">
           <h2>Commissions</h2>
           <div className="table-wrapper">
-            <table className="table_rounted-bottom-corner">
+            <table>
               <thead>
                 <tr>
                   <td>Operation</td>
@@ -42,4 +42,4 @@ function RecentActivity() {
   );
 }
 
-export default RecentActivity;
+export default Commissions;

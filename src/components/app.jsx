@@ -9,8 +9,9 @@ import FeePage from '../pages/fee/index';
 function App() {
   return (
     <Router>
-      <div>
+      <div className="app">
         <Route path="/" component={HeaderContainer} />
+
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/accounts" component={AccountsPage} />
