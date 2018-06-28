@@ -1,6 +1,6 @@
 import React from 'react';
-import AccountDetails from '../../components/account-details';
-import AccountHeader from '../../components/account-header';
+import AccountDetails from '../../account-details';
+import AccountHeader from '../../account-header';
 
 function AccountDetailsPage() {
   return (

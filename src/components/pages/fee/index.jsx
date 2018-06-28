@@ -1,5 +1,5 @@
 import React from 'react';
-import Commissions from '../../components/commissions';
+import Commissions from '../../commissions';
 
 function FeePage() {
   return (

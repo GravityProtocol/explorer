@@ -1,9 +1,11 @@
+import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import React from 'react';
+import { showMenu, hideMenu } from '../actions/menu';
 import Logo from './logo';
-import SearchContainer from '../containers/search';
+import SearchContainer from './search';
 import IconToggler from './icons/toggler';
 import IconClose from './icons/close';
 
@@ -130,4 +132,15 @@ Header.propTypes = {
   scrollIsActive: PropTypes.bool.isRequired,
 };
 
-export default Header;
+const mapStateToProps = state => ({
+  searchIsActive: state.search.active,
+  menuIsActive: state.menu.active,
+  scrollIsActive: state.screen.scrollActive,
+});
+
+const mapDispatchToProps = dispatch => ({
+  showMenu: () => dispatch(showMenu()),
+  hideMenu: () => dispatch(hideMenu()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

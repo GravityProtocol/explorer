@@ -1,7 +1,9 @@
+import { connect } from 'react-redux';
 import { KEY_ESCAPE } from 'keycode-js';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { enableSearch, disableSearch } from '../actions/search';
 import { screenTypes } from '../actions/screen';
 import IconSearch from './icons/search';
 import IconClose from './icons/close';
@@ -51,4 +53,19 @@ Search.propTypes = {
   screenType: PropTypes.string.isRequired,
 };
 
-export default Search;
+const mapStateToProps = state => ({
+  active: state.search.active,
+  screenType: state.screen.type,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onFocus() {
+    dispatch(enableSearch());
+  },
+
+  onReset() {
+    dispatch(disableSearch());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

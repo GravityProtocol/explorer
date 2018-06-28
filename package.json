@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "gravity-protocoljs-ws": "^1.0.3",
     "keycode-js": "^1.0.0",
     "lodash": "^4.17.10",
     "normalize.css": "^8.0.0",

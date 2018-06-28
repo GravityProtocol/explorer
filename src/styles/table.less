@@ -17,34 +17,42 @@
   cursor: pointer;
 }
 
-table {
+.table {
   width: 100%;
   border-collapse: collapse;
 }
 
-thead {
+.table__head {
   color: @gray;
   fill: @gray;
+
+  .table__cell {
+    position: sticky;
+    top: 86px;
+    background: @white;
+  }
 }
 
-tbody {
-  tr {
+.table__body {
+  .table__row {
     &:nth-child(odd) {
-      td {
+      .table__cell {
         background: #fbfbfb;
       }
     }
 
     &:hover {
-      td {
+      .table__cell {
         background: rgba(0,0,0,0.05);
       }
     }
   }
 }
 
-td {
+.table__cell {
+  font-weight: normal;
   padding: 16px 10px;
+  text-align: left;
 
   &:first-child {
     padding-left: 60px;
@@ -64,26 +72,26 @@ td {
 }
 
 .table_responsive {
-  thead {
+  .table__head {
     @media (max-width: 767px) {
       display: none;
     }
   }
 
-  table, tbody, tr, td {
+  .table, .table__body, .table__row, .table__cell {
     @media (max-width: 767px) {
       display: block;
     }
   }
 
-  tbody {
-    tr {
+  .table__body {
+    .table__row {
       &:nth-child(odd) {
         @media (max-width: 767px) {
           background: @lightgray;
         }
 
-        td {
+        .table__cell {
           @media (max-width: 767px) {
             background: transparent;
           }
@@ -91,7 +99,7 @@ td {
       }
 
       &:hover {
-        td {
+        .table__cell {
           @media (max-width: 767px) {
             background: transparent;
           }
@@ -100,13 +108,13 @@ td {
     }
   }
 
-  tr {
+  .table__row {
     @media (max-width: 767px) {
       padding: 0 20px;
     }
   }
 
-  td {
+  .table__cell {
     @media (max-width: 767px) {
       display: flex;
       padding-left: 0;
@@ -124,6 +132,23 @@ td {
       @media (max-width: 767px) {
         border-bottom: none;
       }
+    }
+  }
+}
+
+.table_accounts {
+  .table__cell_amount,
+  .table__cell_index,
+  .table__cell_emission {
+    @media (min-width: 768px) {
+      width: 20%;
+      text-align: right;
+    }
+  }
+
+  .table__cell_id {
+    @media (min-width: 768px) {
+      width: 10%;
     }
   }
 }
