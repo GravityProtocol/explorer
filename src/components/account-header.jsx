@@ -12,7 +12,7 @@ function AccountHeader() {
                   <h1 className="toolbar__title">committee-account</h1>
                 </div>
                 <div className="inline__item">
-                  <span className="badge badge_extragray badge_normal-text">Lifetime Member</span>
+                  <span className="badge badge_extragray">Lifetime Member</span>
                 </div>
               </div>
             </div>

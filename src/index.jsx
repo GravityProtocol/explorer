@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
-import App from './containers/app';
+import App from './components/app';
 import reducers from './reducers';
 import { addResizeScreenListener, addScrollScreenListener } from './actions/screen';
 import { initialize } from './actions/api';

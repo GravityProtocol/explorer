@@ -11,6 +11,19 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "nodes": [
+    "wss://grvapi.graphenelab.org/ws",
+    "wss://api-0.gravityprotocol.org/ws",
+    "wss://api-3.gravityprotocol.org/ws",
+    "wss://api-4.gravityprotocol.org/ws",
+    "wss://api-6.gravityprotocol.org/ws"
+  ],
+  "chainConfig": {
+    "core_asset": "ZGV",
+    "address_prefix": "ZGV",
+    "chain_id": "ab5071857c28ddbc872d0ca508725fa3006ea7bdfda10f707433021f570fc27e"
+  },
+  "chainConfigPrefix": "ZGV",
   "devDependencies": {
     "autoprefixer": "^8.6.3",
     "babel-core": "^6.26.3",
