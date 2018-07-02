@@ -5,7 +5,7 @@ function RecentActivity() {
     <div>
       <h2>Recent Activity</h2>
       <div className="table-wrapper">
-        <table className="table table_responsive">
+        <table className="table table_responsive table_rounted-bottom-corners">
           <thead className="table__head">
             <tr className="table__row">
               <td className="table__cell">Operation</td>

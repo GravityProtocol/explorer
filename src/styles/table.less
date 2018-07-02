@@ -35,18 +35,6 @@
         background: rgba(0,0,0,0.05);
       }
     }
-
-    &:last-child {
-      .table__cell {
-        &:first-child {
-          border-radius: 0 0 0 10px;
-        }
-
-        &:last-child {
-          border-radius: 0 0 10px 0;
-        }
-      }
-    }
   }
 }
 
@@ -137,6 +125,22 @@
   }
 }
 
+.table_rounted-bottom-corners {
+  .table__row {
+    &:last-child {
+      .table__cell {
+        &:first-child {
+          border-radius: 0 0 0 10px;
+        }
+
+        &:last-child {
+          border-radius: 0 0 10px 0;
+        }
+      }
+    }
+  }
+}
+
 .table_accounts {
   .table__cell_amount,
   .table__cell_index,
@@ -151,5 +155,15 @@
     @media (min-width: 768px) {
       width: 10%;
     }
+  }
+}
+
+.table_key-val {
+  .table__cell_key {
+    color: @gray;
+  }
+
+  .table__cell_value {
+    text-align: right;
   }
 }

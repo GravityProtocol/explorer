@@ -37,3 +37,26 @@ export const getAccounts = ids =>
 
       return accounts;
     });
+
+export const getGlobalProperties = () =>
+  Apis.instance().db_api().exec('get_global_properties', []);
+
+export const getWitnesses = activeWitnesses =>
+  Apis.instance().db_api().exec('get_witnesses', [activeWitnesses]);
+
+export const getAccount = id =>
+  Promise.all([
+    getGlobalProperties(),
+    getAccounts([id]),
+  ])
+    .then((data) => {
+      const activeWitnesses = data[0].active_witnesses;
+      const account = data[1][id];
+
+      return getWitnesses(activeWitnesses)
+        .then((witnesses) => {
+          account.witness = witnesses.find(item => item.witness_account === id);
+
+          return account;
+        });
+    });

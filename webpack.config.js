@@ -55,6 +55,11 @@ module.exports = {
   },
   devServer: {
     contentBase: './public',
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [{
+        from: /^\/accounts\/.*$/,
+        to: () => 'index.html',
+      }],
+    },
   },
 };

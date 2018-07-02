@@ -21,7 +21,7 @@ function App(props) {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/accounts" component={AccountsPage} />
-          <Route exact path="/accounts/:name" component={AccountDetailsPage} />
+          <Route exact path="/accounts/:id" component={AccountDetailsPage} />
           <Route exact path="/fee" component={FeePage} />
           <Route component={HomePage} />
         </Switch>

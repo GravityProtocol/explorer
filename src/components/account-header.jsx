@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-function AccountHeader() {
+function AccountHeader(props) {
   return (
     <div>
       <div className="toolbar">
@@ -9,15 +10,17 @@ function AccountHeader() {
             <div className="toolbar__header">
               <div className="inline inline_md">
                 <div className="inline__item">
-                  <h1 className="toolbar__title">committee-account</h1>
+                  <h1 className="toolbar__title">{props.name}</h1>
                 </div>
                 <div className="inline__item">
-                  <span className="badge badge_extragray">Lifetime Member</span>
+                  <span className="badge badge_extragray">
+                    {props.id === props.lifetimeReferrer ? 'Lifetime Member' : 'Free Member'}
+                  </span>
                 </div>
               </div>
             </div>
             <div className="toolbar__footer">
-              ID: 1.2.0
+              ID: {props.id}
             </div>
           </div>
         </div>
@@ -25,5 +28,11 @@ function AccountHeader() {
     </div>
   );
 }
+
+AccountHeader.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  lifetimeReferrer: PropTypes.string.isRequired,
+};
 
 export default AccountHeader;

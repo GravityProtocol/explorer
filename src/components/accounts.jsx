@@ -1,10 +1,10 @@
+import classNames from 'classnames';
 import { range, sortBy } from 'lodash';
 import { Link } from 'react-router-dom';
 import React, { PureComponent } from 'react';
-import IconSort from './icons/sort';
-import IconSortFlip from './icons/sort-flip';
 import { getAccountsCounts, getAccounts } from '../utils/api';
 import { formatAmount, formatIndex } from '../utils/format';
+import SortColButton from './sort-col-button';
 
 const PAGE_SIZE = 10;
 const COL_ID_ID = 0;
@@ -12,8 +12,6 @@ const COL_EMISSION_ID = 1;
 const COL_NAME_ID = 2;
 const COL_INDEX_ID = 3;
 const COL_AMOUNT_ID = 4;
-const ORDER_ASC_ID = 0;
-const ORDER_DESC_ID = 1;
 
 class Accounts extends PureComponent {
   constructor() {
@@ -23,7 +21,7 @@ class Accounts extends PureComponent {
       accountsCount: 0,
       accounts: [],
       sortById: COL_ID_ID,
-      orderId: ORDER_ASC_ID,
+      orderIsAsc: true,
     };
   }
 
@@ -58,13 +56,9 @@ class Accounts extends PureComponent {
   }
 
   sort(sortById) {
-    let orderId;
-
-    if (this.state.sortById === sortById) {
-      orderId = this.state.orderId === ORDER_ASC_ID ? ORDER_DESC_ID : ORDER_ASC_ID;
-    } else {
-      orderId = ORDER_ASC_ID;
-    }
+    const orderIsAsc = this.state.sortById === sortById
+      ? !this.state.orderIsAsc
+      : true;
 
     let accounts = sortBy(this.state.accounts, (item) => {
       switch (sortById) {
@@ -81,94 +75,76 @@ class Accounts extends PureComponent {
       }
     });
 
-    if (orderId === ORDER_DESC_ID) {
+    if (!orderIsAsc) {
       accounts = accounts.reverse();
     }
 
     this.setState({
       accounts,
       sortById,
-      orderId,
+      orderIsAsc,
     });
   }
 
   render() {
-    const sortIcon = this.state.orderId === ORDER_ASC_ID
-      ? <IconSort />
-      : <IconSortFlip />;
+    const showMoreButton = this.state.accounts.length < this.state.accountsCount;
 
     return (
       <div>
         <h2>Accounts</h2>
 
-        <div className="table-wrapper">
-          <table className="table table_responsive table_accounts">
+        <div
+          className="table-wrapper"
+        >
+          <table
+            className={classNames(
+              'table',
+              'table_responsive',
+              'table_accounts',
+              { 'table_rounted-bottom-corners': !showMoreButton },
+            )}
+          >
             <thead className="table__head">
               <tr className="table__row">
                 <th className="table__cell table__cell_id">
-                  <button
-                    className="blank-button"
+                  <SortColButton
+                    title="ID"
                     onClick={() => this.sort(COL_ID_ID)}
-                  >
-                    <span className="inline inline_nowrap">
-                      <span className="inline__item">ID</span>
-                      {this.state.sortById === COL_ID_ID && (
-                        <span className="inline__item">{sortIcon}</span>
-                      )}
-                    </span>
-                  </button>
+                    isSorted={this.state.sortById === COL_ID_ID}
+                    orderIsAsc={this.state.orderIsAsc}
+                  />
                 </th>
                 <th className="table__cell table__cell_name">
-                  <button
-                    className="blank-button"
+                  <SortColButton
+                    title="Name"
                     onClick={() => this.sort(COL_NAME_ID)}
-                  >
-                    <span className="inline inline_nowrap">
-                      <span className="inline__item">Name</span>
-                      {this.state.sortById === COL_NAME_ID && (
-                        <span className="inline__item">{sortIcon}</span>
-                      )}
-                    </span>
-                  </button>
+                    isSorted={this.state.sortById === COL_NAME_ID}
+                    orderIsAsc={this.state.orderIsAsc}
+                  />
                 </th>
                 <th className="table__cell table__cell_emission">
-                  <button
-                    className="blank-button"
+                  <SortColButton
+                    title="Emission"
                     onClick={() => this.sort(COL_EMISSION_ID)}
-                  >
-                    <span className="inline inline_nowrap">
-                      <span className="inline__item">Emission</span>
-                      {this.state.sortById === COL_EMISSION_ID && (
-                        <span className="inline__item">{sortIcon}</span>
-                      )}
-                    </span>
-                  </button>
+                    isSorted={this.state.sortById === COL_EMISSION_ID}
+                    orderIsAsc={this.state.orderIsAsc}
+                  />
                 </th>
                 <th className="table__cell table__cell_index">
-                  <button
-                    className="blank-button"
+                  <SortColButton
+                    title="Gravity Index"
                     onClick={() => this.sort(COL_INDEX_ID)}
-                  >
-                    <span className="inline inline_nowrap">
-                      <span className="inline__item">Gravity Index</span>
-                      {this.state.sortById === COL_INDEX_ID && (
-                        <span className="inline__item">{sortIcon}</span>
-                      )}
-                    </span>
-                  </button>
+                    isSorted={this.state.sortById === COL_INDEX_ID}
+                    orderIsAsc={this.state.orderIsAsc}
+                  />
                 </th>
                 <th className="table__cell table__cell_amount">
-                  <button
-                    className="blank-button"
+                  <SortColButton
+                    title="Amount"
                     onClick={() => this.sort(COL_AMOUNT_ID)}
-                  >
-                    <span className="inline inline_nowrap">
-                      <span className="inline__item">Amount</span>
-                      {this.state.sortById === COL_AMOUNT_ID && (
-                        <span className="inline__item">{sortIcon}</span>
-                      )}
-                    </span>
-                  </button>
+                    isSorted={this.state.sortById === COL_AMOUNT_ID}
+                    orderIsAsc={this.state.orderIsAsc}
+                  />
                 </th>
               </tr>
             </thead>
@@ -176,7 +152,7 @@ class Accounts extends PureComponent {
               {this.state.accounts.map(item => (
                 <tr className="table__row" key={item.account.id}>
                   <td className="table__cell table__cell_id" data-title="ID">{item.account.id}</td>
-                  <td className="table__cell table__cell_name" data-title="Name"><Link to="/accounts/test">{item.account.name}</Link></td>
+                  <td className="table__cell table__cell_name" data-title="Name"><Link to={`/accounts/${item.account.id}`}>{item.account.name}</Link></td>
                   <td className="table__cell table__cell_emission" data-title="Emission">{formatAmount(item.account.emission_volume)}&nbsp;<i>ZVG</i></td>
                   <td className="table__cell table__cell_index" data-title="Gravity Index">{formatIndex(item.account.activity_index)}</td>
                   <td className="table__cell table__cell_amount" data-title="Amount">{item.balances[0] ? formatAmount(item.balances[0].balance) : 0}&nbsp;<i>ZVG</i></td>
@@ -186,7 +162,7 @@ class Accounts extends PureComponent {
           </table>
         </div>
 
-        {this.state.accounts.length < this.state.accountsCount && (
+        {showMoreButton && (
           <div className="section section_center-content">
             <button
               className="button button_gray"
