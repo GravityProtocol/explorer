@@ -6,6 +6,15 @@
   }
 }
 
+.table-wrapper__empty-message {
+  position: relative;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: @gray;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -165,5 +174,22 @@
 
   .table__cell_value {
     text-align: right;
+  }
+}
+
+.table_recent-activity {
+  .table__cell_operation,
+  .table__cell_timestamp,
+  .table__cell_block {
+    @media (min-width: 768px) {
+      width: 20%;
+    }
+  }
+
+  .table__cell_type {
+    @media (min-width: 768px) {
+      width: 40%;
+      text-align: right;
+    }
   }
 }

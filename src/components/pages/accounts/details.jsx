@@ -5,8 +5,7 @@ import AccountHeader from '../../account-header';
 import Keys from '../../keys';
 import AccountInformation from '../../account-information';
 import Balances from '../../balances';
-import VestingBalances from '../../vesting-balances';
-import RecentActivity from '../../recent-activity';
+import RecentActivity from '../../recent-activity/index';
 
 class AccountDetailsPage extends PureComponent {
   constructor() {
@@ -18,12 +17,11 @@ class AccountDetailsPage extends PureComponent {
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params;
-
-    getAccount(id)
+    getAccount(this.props.match.params.id)
       .then((account) => {
-        console.log(account);
-        this.setState({ account });
+        this.setState({
+          account,
+        });
       });
   }
 
@@ -74,19 +72,34 @@ class AccountDetailsPage extends PureComponent {
 
               <div className="grid__item">
                 <div className="panel panel_hidden">
-                  <Balances />
+                  <h2>Balances</h2>
+                  <Balances
+                    balances={this.state.account.balances.map(i => ({
+                      id: i.asset_type,
+                      balance: +i.balance,
+                    }))}
+                  />
                 </div>
               </div>
 
               <div className="grid__item">
                 <div className="panel panel_hidden">
-                  <VestingBalances />
+                  <h2>Vesting Balances</h2>
+                  <Balances
+                    balances={this.state.account.vesting_balances.map(i => ({
+                      id: i.id,
+                      balance: +i.balance.amount,
+                    }))}
+                  />
                 </div>
               </div>
 
               <div className="grid__item">
                 <div className="panel">
-                  <RecentActivity />
+                  <RecentActivity
+                    id={this.props.match.params.id}
+                    totalOps={statistics.total_ops}
+                  />
                 </div>
               </div>
             </div>

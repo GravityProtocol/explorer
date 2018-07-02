@@ -60,3 +60,9 @@ export const getAccount = id =>
           return account;
         });
     });
+
+export const getBlock = blockNum =>
+  Apis.instance().db_api().exec('get_block', [blockNum]);
+
+export const getHistory = (id, lastId, pageSize = 10) =>
+  Apis.instance().history_api().exec('get_account_history', [id, '1.11.0', pageSize, lastId]);

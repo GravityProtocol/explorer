@@ -12,11 +12,12 @@
   "author": "",
   "license": "ISC",
   "nodes": [
-    "wss://grvapi.graphenelab.org/ws",
+    "wss://api-6.gravityprotocol.org/ws",
     "wss://api-0.gravityprotocol.org/ws",
     "wss://api-3.gravityprotocol.org/ws",
     "wss://api-4.gravityprotocol.org/ws",
-    "wss://api-6.gravityprotocol.org/ws"
+    "wss://api-6.gravityprotocol.org/ws",
+    "wss://grvapi.graphenelab.org/ws"
   ],
   "chainConfig": {
     "core_asset": "ZGV",
@@ -51,9 +52,11 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "gravity-protocoljs": "^1.0.2",
     "gravity-protocoljs-ws": "^1.0.3",
     "keycode-js": "^1.0.0",
     "lodash": "^4.17.10",
+    "moment": "^2.22.2",
     "normalize.css": "^8.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",

@@ -6,6 +6,10 @@ const Keys = props => (
   <div>
     <h2>Keys</h2>
 
+    {!props.signingKey && !props.ownerKeys.length && !props.activeKeys.length && (
+      <p><i>Empty</i></p>
+    )}
+
     {props.signingKey && (
       <div>
         <h3>Signing</h3>
@@ -22,39 +26,51 @@ const Keys = props => (
       </div>
     )}
 
-    {props.ownerKeys && (
+    {props.ownerKeys.length > 0 && (
       <div>
         <h3>Owner</h3>
-        {props.ownerKeys.map(key => (
-          <p key={key}>
-            <span className="item">
-              <span className="item__icon">
-                <IconKey />
-              </span>
-              <span className="item__text">
-                <span className="key">{key}</span>
-              </span>
-            </span>
-          </p>
-        ))}
+        {props.ownerKeys.length ? (
+          <div>
+            {props.ownerKeys.map(key => (
+              <p key={key}>
+                <span className="item">
+                  <span className="item__icon">
+                    <IconKey />
+                  </span>
+                  <span className="item__text">
+                    <span className="key">{key}</span>
+                  </span>
+                </span>
+              </p>
+            ))}
+          </div>
+        ) : (
+          <p><i>N/A</i></p>
+        )}
       </div>
     )}
 
-    {props.activeKeys && (
+    {props.activeKeys.length > 0 && (
       <div>
         <h3>Active</h3>
-        {props.activeKeys.map(key => (
-          <p key={key}>
-            <span className="item">
-              <span className="item__icon">
-                <IconKey />
-              </span>
-              <span className="item__text">
-                <span className="key">{key}</span>
-              </span>
-            </span>
-          </p>
-        ))}
+        {props.activeKeys.length ? (
+          <div>
+            {props.activeKeys.map(key => (
+              <p key={key}>
+                <span className="item">
+                  <span className="item__icon">
+                    <IconKey />
+                  </span>
+                  <span className="item__text">
+                    <span className="key">{key}</span>
+                  </span>
+                </span>
+              </p>
+            ))}
+          </div>
+        ) : (
+          <p><i>N/A</i></p>
+        )}
       </div>
     )}
   </div>
@@ -68,8 +84,8 @@ Keys.propTypes = {
 
 Keys.defaultProps = {
   signingKey: undefined,
-  ownerKeys: undefined,
-  activeKeys: undefined,
+  ownerKeys: [],
+  activeKeys: [],
 };
 
 export default Keys;
