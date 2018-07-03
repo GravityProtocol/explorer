@@ -1,5 +1,5 @@
 import React from 'react';
-import Accounts from '../../accounts';
+import Accounts from 'components/accounts';
 
 function AccountsPage() {
   return (

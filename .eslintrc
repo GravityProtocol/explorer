@@ -5,6 +5,10 @@
   },
   "extends": ["airbnb"],
   "rules": {
-    "jsx-a11y/anchor-is-valid": "off"
+    "jsx-a11y/anchor-is-valid": "off",
+    "react/no-array-index-key": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "no-param-reassign": "off"
   }
 }

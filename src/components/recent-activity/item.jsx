@@ -1,9 +1,9 @@
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { getBlock } from '../../utils/api';
-import getTransactionInfo from '../../utils/transaction-info';
+import { getBlock } from 'utils/api';
+import { formatDate } from 'utils/format';
+import TransactionBadge from 'components/transaction-badge';
 
 class Item extends PureComponent {
   constructor() {
@@ -18,14 +18,12 @@ class Item extends PureComponent {
     getBlock(this.props.blockNum)
       .then((data) => {
         this.setState({
-          date: moment(data.timestamp).format('DD.MM.YYYY HH:mm'),
+          date: formatDate(data.timestamp),
         });
       });
   }
 
   render() {
-    const transactionInfo = getTransactionInfo(this.props.op);
-
     return (
       <tr className="table__row">
         <td className="table__cell table__cell_operation" data-title="Operation">
@@ -36,12 +34,7 @@ class Item extends PureComponent {
           <Link to={`/block/${this.props.blockNum}`}>{this.props.blockNum}</Link>
         </td>
         <td className="table__cell table__cell_type" data-title="Type">
-          <span
-            className="badge"
-            style={{ backgroundColor: transactionInfo.color }}
-          >
-            {transactionInfo.name}
-          </span>
+          <TransactionBadge op={this.props.op} />
         </td>
       </tr>
     );

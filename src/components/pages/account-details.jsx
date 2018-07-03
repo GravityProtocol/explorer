@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent, Fragment } from 'react';
-import { getAccount } from '../../../utils/api';
-import AccountHeader from '../../account-header';
-import Keys from '../../keys';
-import AccountInformation from '../../account-information';
-import Balances from '../../balances';
-import RecentActivity from '../../recent-activity/index';
+import { getAccountWithWitness } from 'utils/api';
+import AccountHeader from 'components/account-header';
+import Keys from 'components/keys';
+import AccountInformation from 'components/account-information';
+import Balances from 'components/balances';
+import RecentActivity from 'components/recent-activity/index';
+import Blank from 'components/blank';
 
 class AccountDetailsPage extends PureComponent {
   constructor() {
@@ -18,7 +19,7 @@ class AccountDetailsPage extends PureComponent {
   }
 
   componentDidMount() {
-    getAccount(this.props.match.params.id)
+    getAccountWithWitness(this.props.match.params.id)
       .then((account) => {
         this.setState({
           account,
@@ -42,10 +43,7 @@ class AccountDetailsPage extends PureComponent {
                   lifetimeReferrer={this.state.account.account.lifetime_referrer}
                 />
               ) : (
-                <div className="blank blank_account-header">
-                  <div className="blank__block blank__block_title" />
-                  <div className="blank__block blank__block_row" />
-                </div>
+                <Blank type="header" />
               )}
             </div>
           </div>
@@ -71,10 +69,7 @@ class AccountDetailsPage extends PureComponent {
                       }
                     />
                   ) : (
-                    <div className="blank blank_article">
-                      <div className="blank__block blank__block_title" />
-                      <div className="blank__block blank__block_row" />
-                    </div>
+                    <Blank type="article" />
                   )}
                 </div>
               </div>
@@ -94,10 +89,7 @@ class AccountDetailsPage extends PureComponent {
                       activityIndex={account.activity_index}
                     />
                   ) : (
-                    <div className="blank blank_article">
-                      <div className="blank__block blank__block_title" />
-                      <div className="blank__block blank__block_row" />
-                    </div>
+                    <Blank type="article" />
                   )}
                 </div>
               </div>
@@ -115,10 +107,7 @@ class AccountDetailsPage extends PureComponent {
                       />
                     </Fragment>
                   ) : (
-                    <div className="blank">
-                      <div className="blank__block blank__block_title" />
-                      <div className="blank__block blank__block_row" />
-                    </div>
+                    <Blank />
                   )}
                 </div>
               </div>
@@ -136,10 +125,7 @@ class AccountDetailsPage extends PureComponent {
                       />
                     </Fragment>
                   ) : (
-                    <div className="blank">
-                      <div className="blank__block blank__block_title" />
-                      <div className="blank__block blank__block_row" />
-                    </div>
+                    <Blank />
                   )}
                 </div>
               </div>
@@ -152,10 +138,7 @@ class AccountDetailsPage extends PureComponent {
                       totalOps={statistics.total_ops}
                     />
                   ) : (
-                    <div className="blank blank_article">
-                      <div className="blank__block blank__block_title" />
-                      <div className="blank__block blank__block_row" />
-                    </div>
+                    <Blank type="article" />
                   )}
                 </div>
               </div>

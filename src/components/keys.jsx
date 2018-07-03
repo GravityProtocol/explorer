@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import IconKey from './icons/key';
+import IconKey from 'components/icons/key';
 
 const Keys = props => (
   <div>

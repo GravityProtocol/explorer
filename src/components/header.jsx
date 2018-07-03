@@ -3,11 +3,11 @@ import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import React from 'react';
-import { showMenu, hideMenu } from '../actions/menu';
-import Logo from './logo';
-import SearchContainer from './search';
-import IconToggler from './icons/toggler';
-import IconClose from './icons/close';
+import { showMenu, hideMenu } from 'actions/menu';
+import Logo from 'components/logo';
+import SearchContainer from 'components/search';
+import IconToggler from 'components/icons/toggler';
+import IconClose from 'components/icons/close';
 
 function Header(props) {
   return (

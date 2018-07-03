@@ -2,11 +2,13 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React from 'react';
-import HeaderContainer from './header';
-import HomePage from './pages/index';
-import AccountsPage from './pages/accounts/index';
-import AccountDetailsPage from './pages/accounts/details';
-import FeePage from './pages/fee/index';
+import HeaderContainer from 'components/header';
+import HomePage from 'components/pages/index';
+import AccountsPage from 'components/pages/accounts';
+import AccountDetailsPage from 'components/pages/account-details';
+import FeePage from 'components/pages/fee';
+import BlockPage from 'components/pages/block';
+import TransactionPage from 'components/pages/transaction';
 
 function App(props) {
   if (!props.apiInitialized) {
@@ -22,6 +24,8 @@ function App(props) {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/accounts" component={AccountsPage} />
           <Route exact path="/accounts/:id" component={AccountDetailsPage} />
+          <Route exact path="/block/:num" component={BlockPage} />
+          <Route exact path="/block/:num/:id" component={TransactionPage} />
           <Route exact path="/fee" component={FeePage} />
           <Route component={HomePage} />
         </Switch>

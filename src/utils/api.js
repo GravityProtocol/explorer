@@ -1,4 +1,5 @@
 import { Apis, ChainConfig } from 'gravity-protocoljs-ws';
+import { TRX_TRANSFER_ID, TRX_ACCOUNT_CREATE_ID, TRX_BALANCE_CLAIM_ID } from 'utils/transaction';
 import config from '../../package.json';
 
 ChainConfig.setPrefix(config.chainConfigPrefix);
@@ -38,13 +39,17 @@ export const getAccounts = ids =>
       return accounts;
     });
 
+export const getAccount = id =>
+  getAccounts([id])
+    .then(accounts => accounts[id]);
+
 export const getGlobalProperties = () =>
   Apis.instance().db_api().exec('get_global_properties', []);
 
 export const getWitnesses = activeWitnesses =>
   Apis.instance().db_api().exec('get_witnesses', [activeWitnesses]);
 
-export const getAccount = id =>
+export const getAccountWithWitness = id =>
   Promise.all([
     getGlobalProperties(),
     getAccounts([id]),
@@ -66,3 +71,48 @@ export const getBlock = blockNum =>
 
 export const getHistory = (id, lastId, pageSize = 10) =>
   Apis.instance().history_api().exec('get_account_history', [id, '1.11.0', pageSize, lastId]);
+
+export const getObjects = ids =>
+  Apis.instance().db_api().exec('get_objects', [ids]);
+
+export const getTransaction = (blockNum, trxInBlock) =>
+  Apis.instance().db_api().exec('get_transaction', [blockNum, trxInBlock]);
+
+export const getTransactionDataById = id =>
+  getObjects([id])
+    .then(data => data[0])
+    .then(operation =>
+      getTransaction(operation.block_num, operation.trx_in_block)
+        .then(transaction => ({ transaction, operation })))
+    .then((data) => {
+      if (data.operation.op[0] === TRX_TRANSFER_ID) {
+        return Promise.all([
+          getAccount(data.operation.op[1].from),
+          getAccount(data.operation.op[1].to),
+        ])
+          .then((result) => {
+            [data.operation.op[1].from, data.operation.op[1].to] = result;
+
+            return data;
+          });
+      } else if (data.operation.op[0] === TRX_ACCOUNT_CREATE_ID) {
+        return Promise.all([
+          getAccounts(data.operation.op[1].referrer),
+          getAccounts(data.operation.op[1].registrar),
+        ])
+          .then((result) => {
+            [data.operation.op[1].referrer, data.operation.op[1].registrar] = result;
+
+            return data;
+          });
+      } else if (data.operation.op[0] === TRX_BALANCE_CLAIM_ID) {
+        return getAccount(data.operation.op[1].deposit_to_account)
+          .then((account) => {
+            data.operation.op[1].deposit_to_account = account;
+
+            return data;
+          });
+      }
+
+      return data;
+    });

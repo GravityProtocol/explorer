@@ -3,10 +3,10 @@ import { KEY_ESCAPE } from 'keycode-js';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { enableSearch, disableSearch } from '../actions/search';
-import { screenTypes } from '../actions/screen';
-import IconSearch from './icons/search';
-import IconClose from './icons/close';
+import { enableSearch, disableSearch } from 'actions/search';
+import { screenTypes } from 'actions/screen';
+import IconSearch from 'components/icons/search';
+import IconClose from 'components/icons/close';
 
 function Search(props) {
   return (

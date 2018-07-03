@@ -47,6 +47,10 @@ module.exports = {
   ],
   resolve: {
     extensions: ['*', '.js', '.jsx'],
+    modules: [
+      path.resolve(__dirname, 'src'),
+      path.resolve(__dirname, 'node_modules'),
+    ],
   },
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -58,6 +62,9 @@ module.exports = {
     historyApiFallback: {
       rewrites: [{
         from: /^\/accounts\/.*$/,
+        to: () => 'index.html',
+      }, {
+        from: /^\/block\/.*$/,
         to: () => 'index.html',
       }],
     },

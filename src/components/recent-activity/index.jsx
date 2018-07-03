@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { getHistory } from '../../utils/api';
+import { getHistory } from 'utils/api';
+import Blank from 'components/blank';
 import Item from './item';
 
 const PAGE_SIZE = 10;
@@ -41,10 +42,7 @@ class RecentActivity extends PureComponent {
   render() {
     if (!this.state.loaded) {
       return (
-        <div className="blank blank_article">
-          <div className="blank__block blank__block_title" />
-          <div className="blank__block blank__block_row" />
-        </div>
+        <Blank type="article" />
       );
     }
 

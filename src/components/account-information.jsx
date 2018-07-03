@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { formatIndex } from '../utils/format';
+import { formatIndex } from 'utils/format';
 
 function AccountInformation(props) {
   return (

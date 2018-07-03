@@ -1,6 +1,6 @@
 import React from 'react';
-import Dashboard from '../dashboard';
-import RecentActivity from '../recent-activity/index';
+import Dashboard from 'components/dashboard';
+import RecentActivity from 'components/recent-activity/index';
 
 function HomePage() {
   return (

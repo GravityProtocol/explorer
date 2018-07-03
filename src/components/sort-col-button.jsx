@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import IconSort from './icons/sort';
-import IconSortFlip from './icons/sort-flip';
+import IconSort from 'components/icons/sort';
+import IconSortFlip from 'components/icons/sort-flip';
 
 const SortColButton = props => (
   <button

@@ -2,9 +2,10 @@ import classNames from 'classnames';
 import { range, sortBy } from 'lodash';
 import { Link } from 'react-router-dom';
 import React, { PureComponent } from 'react';
-import { getAccountsCounts, getAccounts } from '../utils/api';
-import { formatAmount, formatIndex } from '../utils/format';
-import SortColButton from './sort-col-button';
+import { getAccountsCounts, getAccounts } from 'utils/api';
+import { formatAmount, formatIndex } from 'utils/format';
+import SortColButton from 'components/sort-col-button';
+import Blank from 'components/blank';
 
 const PAGE_SIZE = 10;
 const COL_ID_ID = 0;
@@ -90,12 +91,7 @@ class Accounts extends PureComponent {
 
   render() {
     if (!this.state.loaded) {
-      return (
-        <div className="blank">
-          <div className="blank__block blank__block_title" />
-          <div className="blank__block blank__block_row" />
-        </div>
-      );
+      return <Blank />;
     }
 
     const showMoreButton = this.state.accounts.length < this.state.accountsCount;
@@ -104,9 +100,7 @@ class Accounts extends PureComponent {
       <div>
         <h2>Accounts</h2>
 
-        <div
-          className="table-wrapper"
-        >
+        <div className="table-wrapper">
           <table
             className={classNames(
               'table',

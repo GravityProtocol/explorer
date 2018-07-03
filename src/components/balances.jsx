@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { formatAmount } from '../utils/format';
+import { formatAmount } from 'utils/format';
 
 function Balances(props) {
   return (

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { memoize } from 'lodash';
 
 export const formatAmount = memoize((value) => {
@@ -14,3 +15,6 @@ export const formatIndex = memoize((value) => {
 
   return Math.round(value * m) / m;
 });
+
+export const formatDate = memoize(date =>
+  moment(date).format('DD.MM.YYYY HH:mm'));
