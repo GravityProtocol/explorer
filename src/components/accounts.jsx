@@ -22,6 +22,7 @@ class Accounts extends PureComponent {
       accounts: [],
       sortById: COL_ID_ID,
       orderIsAsc: true,
+      loaded: false,
     };
   }
 
@@ -39,6 +40,7 @@ class Accounts extends PureComponent {
             this.setState({
               accountsCount,
               accounts,
+              loaded: true,
             });
           });
       });
@@ -87,6 +89,15 @@ class Accounts extends PureComponent {
   }
 
   render() {
+    if (!this.state.loaded) {
+      return (
+        <div className="blank">
+          <div className="blank__block blank__block_title" />
+          <div className="blank__block blank__block_row" />
+        </div>
+      );
+    }
+
     const showMoreButton = this.state.accounts.length < this.state.accountsCount;
 
     return (
@@ -160,6 +171,9 @@ class Accounts extends PureComponent {
               ))}
             </tbody>
           </table>
+          {this.state.loaded && this.state.accounts.length === 0 && (
+            <div className="table-wrapper__empty-message">No accounts</div>
+          )}
         </div>
 
         {showMoreButton && (

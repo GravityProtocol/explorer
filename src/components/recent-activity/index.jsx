@@ -39,6 +39,15 @@ class RecentActivity extends PureComponent {
   }
 
   render() {
+    if (!this.state.loaded) {
+      return (
+        <div className="blank blank_article">
+          <div className="blank__block blank__block_title" />
+          <div className="blank__block blank__block_row" />
+        </div>
+      );
+    }
+
     const { history } = this.state;
     const showMoreButton = history.length !== this.props.totalOps && history.length > 0;
 
