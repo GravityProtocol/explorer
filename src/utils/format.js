@@ -18,3 +18,11 @@ export const formatIndex = memoize((value) => {
 
 export const formatDate = memoize(date =>
   moment(date).format('DD.MM.YYYY HH:mm'));
+
+export const formatUrl = memoize((url) => {
+  if (url.indexOf('://') === -1 && url !== '') {
+    return `//${url}`;
+  }
+
+  return url;
+});

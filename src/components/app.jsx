@@ -9,6 +9,7 @@ import AccountDetailsPage from 'components/pages/account-details';
 import FeePage from 'components/pages/fee';
 import BlockPage from 'components/pages/block';
 import TransactionPage from 'components/pages/transaction';
+import WitnessesPage from 'components/pages/witnesses';
 
 function App(props) {
   if (!props.apiInitialized) {
@@ -26,6 +27,7 @@ function App(props) {
           <Route exact path="/accounts/:name" component={AccountDetailsPage} />
           <Route exact path="/block/:num" component={BlockPage} />
           <Route exact path="/block/:num/:id" component={TransactionPage} />
+          <Route exact path="/witnesses" component={WitnessesPage} />
           <Route exact path="/fee" component={FeePage} />
           <Route component={HomePage} />
         </Switch>

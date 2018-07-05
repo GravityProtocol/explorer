@@ -91,7 +91,7 @@ class Accounts extends PureComponent {
 
   render() {
     if (!this.state.loaded) {
-      return <Blank />;
+      return <Blank type="article" />;
     }
 
     const showMoreButton = this.state.accounts.length < this.state.accountsCount;

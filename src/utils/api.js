@@ -1,3 +1,4 @@
+import { sortBy } from 'lodash';
 import { Apis, ChainConfig } from 'gravity-protocoljs-ws';
 import { FetchChain } from 'gravity-protocoljs';
 import { TRX_TRANSFER_ID, TRX_ACCOUNT_CREATE_ID, TRX_BALANCE_CLAIM_ID } from 'utils/transaction';
@@ -47,7 +48,7 @@ export const getAccount = id =>
 export const getGlobalProperties = () =>
   Apis.instance().db_api().exec('get_global_properties', []);
 
-export const getWitnesses = activeWitnesses =>
+export const getWitnessesData = activeWitnesses =>
   Apis.instance().db_api().exec('get_witnesses', [activeWitnesses]);
 
 export const getAccountWithWitness = name =>
@@ -63,7 +64,7 @@ export const getAccountWithWitness = name =>
           const activeWitnesses = data[0].active_witnesses;
           const account = data[1][id];
 
-          return getWitnesses(activeWitnesses)
+          return getWitnessesData(activeWitnesses)
             .then((witnesses) => {
               account.witness = witnesses.find(item => item.witness_account === id);
 
@@ -71,7 +72,6 @@ export const getAccountWithWitness = name =>
             });
         });
     });
-
 
 export const getBlock = blockNum =>
   Apis.instance().db_api().exec('get_block', [blockNum]);
@@ -123,3 +123,33 @@ export const getTransactionDataById = id =>
 
       return data;
     });
+
+export const getWitnesses = () =>
+  getGlobalProperties()
+    .then((globalProperties) => {
+      const activeWitnesses = globalProperties.active_witnesses;
+
+      return Apis.instance().db_api().exec('lookup_witness_accounts', ['', 100])
+        .then(witnessesID => ({ witnessesID, activeWitnesses }));
+    })
+    .then(({ witnessesID, activeWitnesses }) =>
+      Apis.instance().db_api().exec('get_witnesses', [witnessesID.map(i => i[1])])
+        .then((witnessesData) => {
+          const witnesses = witnessesData.map(item => ({
+            ...item,
+            name: witnessesID.find(name => name[1] === item.id)[0],
+          }));
+
+          let active = witnesses.filter(i => activeWitnesses.find(j => j === i.id));
+          let reserved = witnesses.filter(i => active.indexOf(i) < 0);
+
+          active = sortBy(active, i => +i.total_votes)
+            .map((i, index) => ({ ...i, rank: active.length - index }))
+            .reverse();
+
+          reserved = sortBy(reserved, i => +i.total_votes)
+            .map((i, index) => ({ ...i, rank: reserved.length - (index - active.length) }))
+            .reverse();
+
+          return { active, reserved };
+        }));

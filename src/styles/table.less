@@ -214,3 +214,42 @@
     width: 70%;
   }
 }
+
+.table_witnesses {
+  .table__cell_id,
+  .table__cell_url,
+  .table__cell_rank {
+    @media (min-width: 768px) {
+      width: 10%;
+    }
+  }
+
+  .table__cell_account {
+    @media (min-width: 768px) {
+      width: 20%;
+    }
+  }
+
+  .table__cell_total-votes,
+  .table__cell_missed,
+  .table__cell_last-confirmed-block {
+    @media (min-width: 768px) {
+      text-align: right;
+    }
+  }
+
+  .table__cell_missed,
+  .table__cell_last-confirmed-block {
+    @media (min-width: 768px) {
+      text-align: right;
+      width: 10%;
+    }
+  }
+
+  .table__cell_id,
+  .table__cell_rank {
+    @media (min-width: 768px) and (max-width: 1023px) {
+      display: none;
+    }
+  }
+}

@@ -12,7 +12,7 @@ const SortColButton = props => (
       <span className="inline__item">{props.title}</span>
       {props.isSorted && (
         <span className="inline__item">
-          {props.orderIsAsc ? <IconSort /> : <IconSortFlip />}
+          {props.orderIsAsc ? <IconSortFlip /> : <IconSort />}
         </span>
       )}
     </span>

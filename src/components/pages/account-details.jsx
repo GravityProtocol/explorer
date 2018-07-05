@@ -81,9 +81,7 @@ class AccountDetailsPage extends PureComponent {
                       lifetimeFeesPaid={statistics.lifetime_fees_paid}
                       mostRecentOp={statistics.most_recent_op}
                       referrerName={this.state.account.referrer_name}
-                      referrerId={account.referrer}
                       registrarName={this.state.account.registrar_name}
-                      registrarId={account.registrar}
                       totalCoreInOrders={statistics.total_core_in_orders}
                       totalOps={statistics.total_ops}
                       activityIndex={account.activity_index}

@@ -3,11 +3,11 @@ import React from 'react';
 
 function AccountHeader(props) {
   return (
-    <div className="user-info">
-      <div className="user-info__header">
+    <div className="header-info">
+      <div className="header-info__header">
         <div className="inline inline_md">
           <div className="inline__item">
-            <h1 className="user-info__title">{props.name}</h1>
+            <h1 className="header-info__title">{props.name}</h1>
           </div>
           <div className="inline__item">
             <span className="badge badge_extragray">
@@ -16,7 +16,7 @@ function AccountHeader(props) {
           </div>
         </div>
       </div>
-      <div className="user-info__footer">
+      <div className="header-info__footer">
         ID: {props.id}
       </div>
     </div>
