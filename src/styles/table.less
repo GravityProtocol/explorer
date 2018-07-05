@@ -216,9 +216,8 @@
 }
 
 .table_witnesses {
-  .table__cell_id,
-  .table__cell_url,
-  .table__cell_rank {
+  .table__cell_rank,
+  .table__cell_id {
     @media (min-width: 768px) {
       width: 10%;
     }
@@ -250,6 +249,27 @@
   .table__cell_rank {
     @media (min-width: 768px) and (max-width: 1023px) {
       display: none;
+    }
+  }
+}
+
+.table_committee {
+  .table__cell_rank,
+  .table__cell_id {
+    @media (min-width: 768px) {
+      width: 10%;
+    }
+  }
+
+  .table__cell_account {
+    @media (min-width: 768px) {
+      width: 20%;
+    }
+  }
+
+  .table__cell_total-votes {
+    @media (min-width: 768px) {
+      text-align: right;
     }
   }
 }

@@ -1,7 +1,7 @@
-import { sortBy } from 'lodash';
 import { Apis, ChainConfig } from 'gravity-protocoljs-ws';
 import { FetchChain } from 'gravity-protocoljs';
 import { TRX_TRANSFER_ID, TRX_ACCOUNT_CREATE_ID, TRX_BALANCE_CLAIM_ID } from 'utils/transaction';
+import sortMembers from 'utils/sort-members';
 import config from '../../package.json';
 
 ChainConfig.setPrefix(config.chainConfigPrefix);
@@ -134,22 +134,16 @@ export const getWitnesses = () =>
     })
     .then(({ witnessesID, activeWitnesses }) =>
       Apis.instance().db_api().exec('get_witnesses', [witnessesID.map(i => i[1])])
-        .then((witnessesData) => {
-          const witnesses = witnessesData.map(item => ({
-            ...item,
-            name: witnessesID.find(name => name[1] === item.id)[0],
-          }));
+        .then(witnessesData => sortMembers(witnessesData, witnessesID, activeWitnesses)));
 
-          let active = witnesses.filter(i => activeWitnesses.find(j => j === i.id));
-          let reserved = witnesses.filter(i => active.indexOf(i) < 0);
+export const getCommittee = () =>
+  getGlobalProperties()
+    .then((globalProperties) => {
+      const activeCommittee = globalProperties.active_committee_members;
 
-          active = sortBy(active, i => +i.total_votes)
-            .map((i, index) => ({ ...i, rank: active.length - index }))
-            .reverse();
-
-          reserved = sortBy(reserved, i => +i.total_votes)
-            .map((i, index) => ({ ...i, rank: reserved.length - (index - active.length) }))
-            .reverse();
-
-          return { active, reserved };
-        }));
+      return Apis.instance().db_api().exec('lookup_committee_member_accounts', ['', 100])
+        .then(committeeID => ({ committeeID, activeCommittee }));
+    })
+    .then(({ committeeID, activeCommittee }) =>
+      Apis.instance().db_api().exec('get_committee_members', [committeeID.map(i => i[1])])
+        .then(committeeData => sortMembers(committeeData, committeeID, activeCommittee)));
