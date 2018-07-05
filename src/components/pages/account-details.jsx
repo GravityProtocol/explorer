@@ -19,7 +19,7 @@ class AccountDetailsPage extends PureComponent {
   }
 
   componentDidMount() {
-    getAccountWithWitness(this.props.match.params.id)
+    getAccountWithWitness(this.props.match.params.name)
       .then((account) => {
         this.setState({
           account,
@@ -134,7 +134,7 @@ class AccountDetailsPage extends PureComponent {
                 <div className="panel">
                   {this.state.loaded ? (
                     <RecentActivity
-                      id={this.props.match.params.id}
+                      id={this.state.account.account.id}
                       totalOps={statistics.total_ops}
                     />
                   ) : (
@@ -153,7 +153,7 @@ class AccountDetailsPage extends PureComponent {
 AccountDetailsPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string,
+      name: PropTypes.string,
     }),
   }).isRequired,
 };

@@ -157,7 +157,7 @@ class Accounts extends PureComponent {
               {this.state.accounts.map(item => (
                 <tr className="table__row" key={item.account.id}>
                   <td className="table__cell table__cell_id" data-title="ID">{item.account.id}</td>
-                  <td className="table__cell table__cell_name" data-title="Name"><Link to={`/accounts/${item.account.id}`}>{item.account.name}</Link></td>
+                  <td className="table__cell table__cell_name" data-title="Name"><Link to={`/accounts/${item.account.name}`}>{item.account.name}</Link></td>
                   <td className="table__cell table__cell_emission" data-title="Emission">{formatAmount(item.account.emission_volume)}&nbsp;<i>ZVG</i></td>
                   <td className="table__cell table__cell_index" data-title="Gravity Index">{formatIndex(item.account.activity_index)}</td>
                   <td className="table__cell table__cell_amount" data-title="Amount">{item.balances[0] ? formatAmount(item.balances[0].balance) : 0}&nbsp;<i>ZVG</i></td>

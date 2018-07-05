@@ -1,4 +1,5 @@
 import { Apis, ChainConfig } from 'gravity-protocoljs-ws';
+import { FetchChain } from 'gravity-protocoljs';
 import { TRX_TRANSFER_ID, TRX_ACCOUNT_CREATE_ID, TRX_BALANCE_CLAIM_ID } from 'utils/transaction';
 import config from '../../package.json';
 
@@ -49,22 +50,28 @@ export const getGlobalProperties = () =>
 export const getWitnesses = activeWitnesses =>
   Apis.instance().db_api().exec('get_witnesses', [activeWitnesses]);
 
-export const getAccountWithWitness = id =>
-  Promise.all([
-    getGlobalProperties(),
-    getAccounts([id]),
-  ])
-    .then((data) => {
-      const activeWitnesses = data[0].active_witnesses;
-      const account = data[1][id];
+export const getAccountWithWitness = name =>
+  FetchChain('getAccount', name)
+    .then((acc) => {
+      const id = acc.get('id');
 
-      return getWitnesses(activeWitnesses)
-        .then((witnesses) => {
-          account.witness = witnesses.find(item => item.witness_account === id);
+      return Promise.all([
+        getGlobalProperties(),
+        getAccounts([id]),
+      ])
+        .then((data) => {
+          const activeWitnesses = data[0].active_witnesses;
+          const account = data[1][id];
 
-          return account;
+          return getWitnesses(activeWitnesses)
+            .then((witnesses) => {
+              account.witness = witnesses.find(item => item.witness_account === id);
+
+              return account;
+            });
         });
     });
+
 
 export const getBlock = blockNum =>
   Apis.instance().db_api().exec('get_block', [blockNum]);
@@ -97,8 +104,8 @@ export const getTransactionDataById = id =>
           });
       } else if (data.operation.op[0] === TRX_ACCOUNT_CREATE_ID) {
         return Promise.all([
-          getAccounts(data.operation.op[1].referrer),
-          getAccounts(data.operation.op[1].registrar),
+          getAccount(data.operation.op[1].referrer),
+          getAccount(data.operation.op[1].registrar),
         ])
           .then((result) => {
             [data.operation.op[1].referrer, data.operation.op[1].registrar] = result;
