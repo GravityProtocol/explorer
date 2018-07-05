@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import WitnessesTable from 'components/witnesses-table';
 import Blank from 'components/blank';
 import { getWitnesses } from 'utils/api';
@@ -35,7 +35,10 @@ class WitnessesPage extends PureComponent {
         <div className="section">
           <div className="panel">
             {this.state.loaded ? (
-              <WitnessesTable data={this.state.active} />
+              <Fragment>
+                <h2>Active Witnesses</h2>
+                <WitnessesTable data={this.state.active} />
+              </Fragment>
             ) : (
               <Blank type="article" />
             )}
@@ -44,7 +47,10 @@ class WitnessesPage extends PureComponent {
         <div className="section">
           <div className="panel">
             {this.state.loaded ? (
-              <WitnessesTable data={this.state.reserved} />
+              <Fragment>
+                <h2>Reserve Witnesses</h2>
+                <WitnessesTable data={this.state.reserved} />
+              </Fragment>
             ) : (
               <Blank type="article" />
             )}

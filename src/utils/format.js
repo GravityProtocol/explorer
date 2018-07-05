@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { memoize } from 'lodash';
 
-export const formatAmount = memoize((value) => {
+export const formatAmount = memoize((value = 0) => {
   const amount = Number(value) / 100000;
   const helpString = String(amount).split('.');
 

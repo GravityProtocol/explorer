@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import CommitteeTable from 'components/committee-table';
 import Blank from 'components/blank';
 import { getCommittee } from 'utils/api';
@@ -35,7 +35,10 @@ class CommitteePage extends PureComponent {
         <div className="section">
           <div className="panel">
             {this.state.loaded ? (
-              <CommitteeTable data={this.state.active} />
+              <Fragment>
+                <h2>Active Committee</h2>
+                <CommitteeTable data={this.state.active} />
+              </Fragment>
             ) : (
               <Blank type="article" />
             )}
@@ -44,7 +47,10 @@ class CommitteePage extends PureComponent {
         <div className="section">
           <div className="panel">
             {this.state.loaded ? (
-              <CommitteeTable data={this.state.reserved} />
+              <Fragment>
+                <h2>Reserve Committee</h2>
+                <CommitteeTable data={this.state.reserved} />
+              </Fragment>
             ) : (
               <Blank type="article" />
             )}

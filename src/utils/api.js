@@ -1,5 +1,6 @@
+import { startCase } from 'lodash';
 import { Apis, ChainConfig } from 'gravity-protocoljs-ws';
-import { FetchChain } from 'gravity-protocoljs';
+import { FetchChain, ChainTypes } from 'gravity-protocoljs';
 import { TRX_TRANSFER_ID, TRX_ACCOUNT_CREATE_ID, TRX_BALANCE_CLAIM_ID } from 'utils/transaction';
 import sortMembers from 'utils/sort-members';
 import config from '../../package.json';
@@ -147,3 +148,14 @@ export const getCommittee = () =>
     .then(({ committeeID, activeCommittee }) =>
       Apis.instance().db_api().exec('get_committee_members', [committeeID.map(i => i[1])])
         .then(committeeData => sortMembers(committeeData, committeeID, activeCommittee)));
+
+export const getFee = () =>
+  getGlobalProperties()
+    .then((globalProperties) => {
+      const operationsNames = Object.keys(ChainTypes.operations);
+
+      return operationsNames.map((item, index) => ({
+        name: startCase(item),
+        ...globalProperties.parameters.current_fees.parameters[index],
+      }));
+    });
