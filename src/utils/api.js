@@ -5,6 +5,8 @@ import { TRX_TRANSFER_ID, TRX_ACCOUNT_CREATE_ID, TRX_BALANCE_CLAIM_ID } from 'ut
 import sortMembers from 'utils/sort-members';
 import config from '../../package.json';
 
+const { bpabApiUrl } = config;
+
 ChainConfig.setPrefix(config.chainConfigPrefix);
 ChainConfig.networks.gravity = config.chainConfig;
 
@@ -159,3 +161,28 @@ export const getFee = () =>
         ...globalProperties.parameters.current_fees.parameters[index],
       }));
     });
+
+export const getLastTransactions = () =>
+  fetch(`${bpabApiUrl}/lastnetworkops`)
+    .then(resp => resp.json())
+    .then(data => data.map(item => ({
+      id: item[2],
+      timestamp: item[6],
+      block: item[3],
+      type: item[9],
+    })));
+
+export const getDashbord = () =>
+  Promise.all([
+    getAccountsCounts(),
+    Apis.instance().db_api().exec('get_dynamic_global_properties', []),
+    Apis.instance().db_api().exec('get_objects', [['2.3.0']]),
+    getGlobalProperties(),
+  ])
+    .then(data => ({
+      usersCount: +data[0],
+      currentBlock: +data[1].head_block_number,
+      currentSupply: +data[2][0].current_supply,
+      activeWitnesses: +data[3].active_witnesses.length,
+      activeCommittee: +data[3].active_committee_members.length,
+    }));

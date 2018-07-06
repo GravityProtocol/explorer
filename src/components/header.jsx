@@ -54,6 +54,7 @@ function Header(props) {
                   to="/"
                   className="menu__item"
                   activeClassName="menu__item_active"
+                  isActive={(match, location) => location.pathname === '/'}
                   onClick={() => props.hideMenu()}
                 >
                   <span className="menu__link">Dashboard</span>
