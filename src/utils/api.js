@@ -165,6 +165,13 @@ export const getFee = () =>
 export const getLastTransactions = () =>
   fetch(`${bpabApiUrl}/lastnetworkops`)
     .then(resp => resp.json())
+    .then((data) => {
+      if (data && data.length) {
+        return data;
+      }
+
+      throw new Error();
+    })
     .then(data => data.map(item => ({
       id: item[2],
       timestamp: item[6],

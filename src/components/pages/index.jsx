@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import Dashboard from 'components/dashboard';
 import LastTransactions from 'components/last-transactions';
 import { getDashbord, getLastTransactions } from 'utils/api';
@@ -18,6 +18,14 @@ class HomePage extends PureComponent {
 
   componentDidMount() {
     this.getData();
+
+    this.interval = setInterval(() => {
+      this.getData();
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   getData() {
@@ -40,7 +48,7 @@ class HomePage extends PureComponent {
 
   render() {
     return (
-      <div>
+      <Fragment>
         {!this.state.loaded ? (
           <DashboardBlank />
         ) : (
@@ -58,7 +66,7 @@ class HomePage extends PureComponent {
             </div>
           </div>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
