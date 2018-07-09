@@ -45,8 +45,10 @@ export const getAccounts = ids =>
     });
 
 export const getAccount = id =>
-  getAccounts([id])
-    .then(accounts => accounts[id]);
+  getAccounts([id]).then(accounts => accounts[id]);
+
+export const getAccountByName = name =>
+  Apis.instance().db_api().exec('get_account_by_name', [name]);
 
 export const getGlobalProperties = () =>
   Apis.instance().db_api().exec('get_global_properties', []);

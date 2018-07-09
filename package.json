@@ -52,8 +52,10 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "connected-react-router": "^4.3.0",
     "gravity-protocoljs": "^1.0.2",
     "gravity-protocoljs-ws": "^1.0.3",
+    "history": "^4.7.2",
     "keycode-js": "^1.0.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
@@ -62,7 +64,9 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "react-transition-group": "^2.4.0",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0"
   }

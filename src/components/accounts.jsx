@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { range, sortBy } from 'lodash';
 import { Link } from 'react-router-dom';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { getAccountsCounts, getAccounts } from 'utils/api';
 import { formatAmount, formatIndex } from 'utils/format';
 import SortColButton from 'components/sort-col-button';
@@ -97,7 +97,7 @@ class Accounts extends PureComponent {
     const showMoreButton = this.state.accounts.length < this.state.accountsCount;
 
     return (
-      <div>
+      <Fragment>
         <h2>Accounts</h2>
 
         <div className="table-wrapper">
@@ -186,7 +186,7 @@ class Accounts extends PureComponent {
             </button>
           </div>
         )}
-      </div>
+      </Fragment>
     );
   }
 }

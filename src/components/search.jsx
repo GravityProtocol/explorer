@@ -3,7 +3,7 @@ import { KEY_ESCAPE } from 'keycode-js';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { enableSearch, disableSearch } from 'actions/search';
+import { enableSearch, resetSearch, setQuery, search } from 'actions/search';
 import { screenTypes } from 'actions/screen';
 import IconSearch from 'components/icons/search';
 import IconClose from 'components/icons/close';
@@ -16,11 +16,17 @@ function Search(props) {
         { search_active: props.active },
       )}
     >
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          e.target.querySelector('input').blur();
+          props.search(props.query);
+        }}
+      >
         <button
           className="search__action search__action_reset"
           type="button"
-          onClick={() => props.onReset()}
+          onClick={() => props.resetSearch()}
         >
           <IconClose />
         </button>
@@ -29,16 +35,20 @@ function Search(props) {
           className="search__query"
           type="text"
           placeholder={props.screenType === screenTypes.LARGE ? 'Find a block, transaction or account' : 'Search'}
-          onFocus={() => props.onFocus()}
+          value={props.query}
+          onFocus={() => props.enableSearch()}
           onKeyUp={(e) => {
             if (e.keyCode === KEY_ESCAPE) {
-              props.onReset();
+              props.resetSearch();
               e.target.blur();
             }
           }}
+          onChange={(e) => {
+            props.setQuery(e.target.value);
+          }}
         />
 
-        <button className="search__action search__action_submit" type="button">
+        <button className="search__action search__action_submit" type="submit">
           <IconSearch />
         </button>
       </form>
@@ -47,24 +57,36 @@ function Search(props) {
 }
 
 Search.propTypes = {
-  onFocus: PropTypes.func.isRequired,
+  enableSearch: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
-  onReset: PropTypes.func.isRequired,
+  resetSearch: PropTypes.func.isRequired,
   screenType: PropTypes.string.isRequired,
+  query: PropTypes.string.isRequired,
+  setQuery: PropTypes.func.isRequired,
+  search: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   active: state.search.active,
   screenType: state.screen.type,
+  query: state.search.query,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onFocus() {
+  enableSearch() {
     dispatch(enableSearch());
   },
 
-  onReset() {
-    dispatch(disableSearch());
+  resetSearch() {
+    dispatch(resetSearch());
+  },
+
+  setQuery(query) {
+    dispatch(setQuery(query));
+  },
+
+  search(query) {
+    dispatch(search(query));
   },
 });
 

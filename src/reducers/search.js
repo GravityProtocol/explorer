@@ -1,5 +1,10 @@
 import { combineReducers } from 'redux';
-import { ENABLE_SEARCH, DISABLE_SEARCH } from '../actions/search';
+import {
+  ENABLE_SEARCH,
+  DISABLE_SEARCH,
+  SET_QUERY,
+  SET_NOT_FOUND_MESSAGE_VISIBLE,
+} from '../actions/search';
 
 const active = (state = false, action) => {
   switch (action.type) {
@@ -12,6 +17,24 @@ const active = (state = false, action) => {
   }
 };
 
+const query = (state = '', action) => {
+  switch (action.type) {
+    case SET_QUERY:
+      return action.data;
+    default:
+      return state;
+  }
+};
+
+const notFoundMessageVisible = (state = false, action) => {
+  switch (action.type) {
+    case SET_NOT_FOUND_MESSAGE_VISIBLE:
+      return action.data;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
-  active,
+  active, query, notFoundMessageVisible,
 });
