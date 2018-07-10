@@ -20,7 +20,7 @@ function Search(props) {
         onSubmit={(e) => {
           e.preventDefault();
           e.target.querySelector('input').blur();
-          props.search(props.query);
+          props.search(props.query.trim());
         }}
       >
         <button

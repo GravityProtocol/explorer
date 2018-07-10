@@ -1,4 +1,4 @@
-import { startCase } from 'lodash';
+import { startCase, range } from 'lodash';
 import { Apis, ChainConfig } from 'gravity-protocoljs-ws';
 import { FetchChain, ChainTypes } from 'gravity-protocoljs';
 import { TRX_TRANSFER_ID, TRX_ACCOUNT_CREATE_ID, TRX_BALANCE_CLAIM_ID } from 'utils/transaction';
@@ -52,6 +52,9 @@ export const getAccountByName = name =>
 
 export const getGlobalProperties = () =>
   Apis.instance().db_api().exec('get_global_properties', []);
+
+export const getGlobalDynamicProperties = () =>
+  Apis.instance().db_api().exec('get_dynamic_global_properties', []);
 
 export const getWitnessesData = activeWitnesses =>
   Apis.instance().db_api().exec('get_witnesses', [activeWitnesses]);
@@ -164,7 +167,7 @@ export const getFee = () =>
       }));
     });
 
-export const getLastTransactions = () =>
+export const getRecentTransactions = () =>
   fetch(`${bpabApiUrl}/lastnetworkops`)
     .then(resp => resp.json())
     .then((data) => {
@@ -195,3 +198,16 @@ export const getDashbord = () =>
       activeWitnesses: +data[3].active_witnesses.length,
       activeCommittee: +data[3].active_committee_members.length,
     }));
+
+export const getLastBlocks = count =>
+  getGlobalDynamicProperties()
+    .then((properties) => {
+      const headBlockNumber = properties.head_block_number;
+      const lastBlocks = range(headBlockNumber, headBlockNumber - count);
+
+      return Promise.all(lastBlocks.map(i => getBlock(i)));
+    });
+
+export const getLastBlock = () =>
+  getGlobalDynamicProperties()
+    .then(properties => getBlock(properties.head_block_number));

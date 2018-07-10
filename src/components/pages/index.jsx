@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import Dashboard from 'components/dashboard';
 import LastTransactions from 'components/last-transactions';
-import { getDashbord, getLastTransactions } from 'utils/api';
+import { getDashbord, getRecentTransactions } from 'utils/api';
 import DashboardBlank from 'components/dashboard-blank';
 import Blank from 'components/blank';
 
@@ -30,7 +30,7 @@ class HomePage extends PureComponent {
 
   getData() {
     Promise.all([
-      getLastTransactions(),
+      getRecentTransactions(),
       getDashbord(),
     ])
       .then((data) => {

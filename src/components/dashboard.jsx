@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { formatAmount } from 'utils/format';
+import TransactionsChart from 'components/transactions-chart';
 
 const Dashboard = props => (
   <div className="dashboard">
@@ -20,7 +21,7 @@ const Dashboard = props => (
             <div className="dashboard__title">Total Transactions</div>
           </div>
           <div className="dashboard__cell">
-            <div className="dashboard__value">d3.js</div>
+            <div className="dashboard__value"><TransactionsChart /></div>
             <div className="dashboard__title">Transactions/Block</div>
           </div>
         </div>

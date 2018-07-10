@@ -53,6 +53,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "connected-react-router": "^4.3.0",
+    "d3": "^5.5.0",
     "gravity-protocoljs": "^1.0.2",
     "gravity-protocoljs-ws": "^1.0.3",
     "history": "^4.7.2",

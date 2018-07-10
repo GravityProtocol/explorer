@@ -58,6 +58,8 @@ module.exports = {
     publicPath: '/',
   },
   devServer: {
+    hot: false,
+    inline: false,
     contentBase: './public',
     historyApiFallback: {
       rewrites: [{
