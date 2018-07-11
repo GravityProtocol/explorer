@@ -11,11 +11,10 @@
   "author": "",
   "license": "ISC",
   "nodes": [
-    "wss://grvapi.graphenelab.org/ws",
-    "wss://api-6.gravityprotocol.org/ws",
-    "wss://api-0.gravityprotocol.org/ws",
-    "wss://api-3.gravityprotocol.org/ws",
-    "wss://api-4.gravityprotocol.org/ws"
+    "wss://api-0.gravity.io/ws",
+    "wss://api-3.gravity.io/ws",
+    "wss://api-4.gravity.io/ws",
+    "wss://api-6.gravity.io/ws"
   ],
   "chainConfig": {
     "core_asset": "ZGV",
