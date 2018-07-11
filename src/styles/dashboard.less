@@ -23,9 +23,10 @@
 
 .dashboard__cell {
   display: table-cell;
+  box-sizing: border-box;
   vertical-align: top;
   padding: 20px;
-  box-sizing: border-box;
+  width: 25%;
 
   @media (max-width: 1023px) {
     display: inline-block;
@@ -35,6 +36,12 @@
 
   @media (max-width: 767px) {
     width: 100%;
+  }
+}
+
+.dashboard__cell_chart {
+  @media (max-width: 767px) {
+    display: none;
   }
 }
 

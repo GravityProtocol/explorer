@@ -7,7 +7,7 @@ export const formatAmount = memoize((value = 0) => {
 
   helpString[0] = Math.floor(helpString[0]).toLocaleString('ru-RU');
 
-  return helpString.join(',');
+  return helpString.join('.');
 });
 
 export const formatIndex = memoize((value) => {

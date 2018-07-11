@@ -9,7 +9,7 @@ const Dashboard = props => (
       <div className="dashboard__table">
         <div className="dashboard__row">
           <div className="dashboard__cell">
-            <div className="dashboard__value">{props.data.usersCount}</div>
+            <div className="dashboard__value">{Math.floor(props.data.usersCount).toLocaleString('ru-RU')}</div>
             <div className="dashboard__title">All Users</div>
           </div>
           <div className="dashboard__cell">
@@ -20,7 +20,7 @@ const Dashboard = props => (
             <div className="dashboard__value">{Math.floor(props.data.totalTransactions).toLocaleString('ru-RU')}</div>
             <div className="dashboard__title">Total Transactions</div>
           </div>
-          <div className="dashboard__cell">
+          <div className="dashboard__cell dashboard__cell_chart">
             <div className="dashboard__value"><TransactionsChart /></div>
             <div className="dashboard__title">Transactions/Block</div>
           </div>
